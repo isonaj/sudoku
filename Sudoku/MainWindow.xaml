@@ -13,9 +13,14 @@
     </Window.DataContext>
 
     <Window.Resources>
+        <local:BoolToFontWeightConverter x:Key="converter"/>
+        <local:StringToVisibilityConverter x:Key="visConverter"/>
         <DataTemplate x:Key="inner">
             <Border BorderBrush="Gray" BorderThickness="1">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding}"/>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="{Binding Options}" HorizontalAlignment="Center" FontSize="8" Visibility="{Binding Options, Converter={StaticResource visConverter}}"/>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Value}" FontSize="18" FontWeight="{Binding IsLocked, Converter={StaticResource converter}}"/>
+                </DockPanel>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="outer">
